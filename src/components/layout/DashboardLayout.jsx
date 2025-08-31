@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Sun, Moon } from "lucide-react";
 
 const DashboardLayout = ({ children }) => {
@@ -12,6 +12,20 @@ const DashboardLayout = ({ children }) => {
 
   const [darkMode, setDarkMode] = useState(false);
 
+  const [active, setActive] = useState("dashboard");
+  const navigateDashboard = () => {
+    navigate("/dashboard");
+    setActive("dashboard");
+  };
+  const navigateUserDashboard = () => {
+    navigate("/userdashboard");
+    setActive("userdashboard");
+    console.log(active);
+  };
+  // useEffect(() => {
+  //   navigateUserDashboard();
+  // }, []);
+
   return (
     <div
       className={`flex h-screen ${
@@ -21,10 +35,22 @@ const DashboardLayout = ({ children }) => {
       <div className="w-62 bg-gray-900 text-white flex flex-col p-4 gap-6">
         <h1 className="text-xl font-bold mb-5">Admin</h1>
 
-        <Button variant="ghost" className="justify-start">
+        <Button
+          variant="ghost"
+          className={`justify-start ${
+            active === "dashboard" ? "bg-gray-700" : ""
+          }`}
+          onClick={() => navigateDashboard()}
+        >
           Driver Data
         </Button>
-        <Button variant="ghost" className="justify-start">
+        <Button
+          variant="ghost"
+          className={`justify-start ${
+            active === "userdashboard" ? "bg-gray-700" : ""
+          }`}
+          onClick={() => navigateUserDashboard()}
+        >
           Users
         </Button>
         <Button variant="ghost" className="justify-start">
@@ -34,7 +60,7 @@ const DashboardLayout = ({ children }) => {
 
       <div className="flex-1 flex flex-col">
         <header className="h-14 border-b flex items-center justify-between px-4">
-          <h2 className="text-lg font-semibold m-2">Driver Data</h2>
+          <h2 className="text-lg font-semibold m-2">Dashboard</h2>
 
           <div className="flex items-center gap-2">
             <Button variant="outline" onClick={() => setDarkMode(!darkMode)}>

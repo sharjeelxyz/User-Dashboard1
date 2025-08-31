@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import DashboardLayout from "@/components/layout/DashboardLayout";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Input } from "@/components/ui/input";
-import { useNavigate } from "react-router-dom";
 
 import {
   Table,
@@ -12,27 +11,25 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import DriverModal from "../components/modals/DriverModal";
+import UserModal from "../components/modals/UserModal";
 
-const Dashboard = () => {
+const UserDashboard = () => {
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState("");
 
   useEffect(() => {
-    fetch("https://loadgo.in/loadgo/getDriver")
+    fetch("https://loadgo.in/loadgo/getUser")
       .then((res) => res.json())
       .then((data) => {
         const drivers = Array.isArray(data) ? data : data.data;
         const formatted = drivers.map((user) => ({
           ID: user.id,
-          Name: user.driverName,
+          Name: user.name,
           Email: user.email,
-          VehicleNo: user.vehicleNo,
-          VehicleType: user.vehicletype,
+          LoginPin: user.loginPin,
           PhoneNo: user.phone,
-          status: user.id % 2 === 0 ? "Active" : "Inactive",
-          joined: "2024-08-21",
+          CreatedOn: user.createdOn,
           // for the modal
           aadharFront: user.aadharFront,
           dlFront: user.licenseFront,
@@ -58,7 +55,7 @@ const Dashboard = () => {
 
   return (
     <DashboardLayout>
-      <h1 className="text-2xl font-bold mb-4">Driver Table</h1>
+      <h1 className="text-2xl font-bold mb-4">User Table</h1>
       <Input
         placeholder="Search by Name, Email or Phone No"
         value={search}
@@ -73,11 +70,9 @@ const Dashboard = () => {
               <TableHead>ID</TableHead>
               <TableHead>Name</TableHead>
               <TableHead>Email</TableHead>
-              <TableHead>Vehicle No</TableHead>
-              <TableHead>Vehicle Type</TableHead>
+              <TableHead>Login Pin</TableHead>
               <TableHead>Phone No</TableHead>
-              <TableHead>Status</TableHead>
-              <TableHead>Joined</TableHead>
+              <TableHead>Created On</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
@@ -118,11 +113,9 @@ const Dashboard = () => {
               <TableHead>ID</TableHead>
               <TableHead>Name</TableHead>
               <TableHead>Email</TableHead>
-              <TableHead>Vehicle No</TableHead>
-              <TableHead>Vehicle Type</TableHead>
+              <TableHead>Login Pin</TableHead>
               <TableHead>Phone No</TableHead>
-              <TableHead>Status</TableHead>
-              <TableHead>Joined</TableHead>
+              <TableHead>Created On</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
@@ -131,13 +124,11 @@ const Dashboard = () => {
                 <TableCell>{user.ID}</TableCell>
                 <TableCell>{user.Name}</TableCell>
                 <TableCell>{user.Email}</TableCell>
-                <TableCell>{user.VehicleNo}</TableCell>
-                <TableCell>{user.VehicleType}</TableCell>
+                <TableCell>{user.LoginPin}</TableCell>
                 <TableCell>{user.PhoneNo}</TableCell>
-                <TableCell>{user.status}</TableCell>
-                <TableCell>{user.joined}</TableCell>
+                <TableCell>{user.CreatedOn}</TableCell>
                 <TableCell>
-                  <DriverModal user={user} />
+                  <UserModal user={user} />
                 </TableCell>
               </TableRow>
             ))}
@@ -148,4 +139,4 @@ const Dashboard = () => {
   );
 };
 
-export default Dashboard;
+export default UserDashboard;
