@@ -12,7 +12,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import DriverModal from "../components/modals/DriverModal";
+import DriverModal from "../components/modals/Driver-Modals/DriverModal";
 
 const Dashboard = () => {
   const [users, setUsers] = useState([]);

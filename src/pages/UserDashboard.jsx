@@ -11,7 +11,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import UserModal from "../components/modals/UserModal";
+import UserModal from "../components/modals/User-Modals/UserModal";
 
 const UserDashboard = () => {
   const [users, setUsers] = useState([]);

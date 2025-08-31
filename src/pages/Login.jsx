@@ -2,11 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 function Login() {
-  // const [email, setEmail] = useState("");
-  // const [emailError, setEmailError] = useState(null);
   const [password, setPassword] = useState("");
-  // const [confirmPassword, setConfirmPassword] = useState("");
-  // const [passwordError, setPasswordError] = useState(null);
   const [name, setName] = useState("");
   const [nameError, setNameError] = useState(null);
 
@@ -26,17 +22,6 @@ function Login() {
     } else {
       alert("Invalid username or password");
     }
-
-    // if (!email.includes(".") && !email.includes("@")) {
-    //   setEmailError("Please enter a valid email address.");
-    // } else {
-    //   setEmailError("");
-    // }
-    // if (password !== confirmPassword) {
-    //   setPasswordError("Passwords do not match.");
-    // } else {
-    //   setPasswordError("");
-    // }
   };
 
   return (
